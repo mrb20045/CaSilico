@@ -201,6 +201,7 @@ CaSilico=function(ResultsFolder="CaSilico_output",
       chmod_command=paste0("chmod  777  ","'",path,"'")
       lapply(chmod_command, system)
       }
+    lapply(paste0("chmod -R 777  ",MAFFT_location), system)
     }
   #############################################
   is_empty=function(X){
