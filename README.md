@@ -51,7 +51,7 @@ CaSilico(ResultsFolder="Example",
 
 
 
-#Run with TargetFasta and off-target analysis
+#Run with TargetFasta and off-target analysis (local off-target analysis)
 
 data <- paste0(system.file(package = "CaSilico"),"/data/3D.fasta")
 
@@ -76,7 +76,22 @@ CaSilico(ResultsFolder="Example2",
 
 
 
+#Run with TargetFasta and off-target analysis (online off-target analysis)
 
+data <- paste0(system.file(package = "CaSilico"),"/data/3D.fasta")
+
+CaSilico(ResultsFolder="Example2",
+         TargetFasta=data ,
+         TargetAccession=NULL,
+         CrisprTypes=c("casVI_A"),
+         ConservationMethod = 1,
+         ConservationThreshold=0.98,
+         OffTarget = T,
+         OffAsk = F,
+         Organism="Homo sapiens",
+         LocalOff=F)
+         
+         
  #Run with accession numbers
 
  CaSilico(ResultsFolder="Example3",
