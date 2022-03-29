@@ -33,12 +33,13 @@ install_github("mrb20045/CaSilico")
 ```
 library("CaSilico")
 
+############# (1) #############
+# Run with TargetFasta and without off-target analysis
 
-
-#Run with TargetFasta
-
+# Full path of target sequences
 data <- paste0(system.file(package = "CaSilico"),"/data/3D.fasta")
 
+# Run CaSilico for subtype VI_A with ConservationThreshold = 0.98 and ConservationMethod = 1
 CaSilico(ResultsFolder="Example",
          TargetFasta=data,
          TargetAccession=NULL,
@@ -47,24 +48,29 @@ CaSilico(ResultsFolder="Example",
          ConservationThreshold=0.98,
          OffTarget = F,
          OffAsk = F)
+##############################
+#
+#
+#
+############# (2) #############
 
+# Run with TargetFasta and offline off-target analysis
 
-
-
-#Run with TargetFasta and off-target analysis (local off-target analysis)
-
+# Full path of target sequences
 data <- paste0(system.file(package = "CaSilico"),"/data/3D.fasta")
 
+# Full path to fasta file sequences for local off target analysis
 genome_dir <- paste0(system.file(package = "CaSilico"),"/data/genomes_off_target")
-
 Local_Fasta <- file.path(genome_dir,list.files(genome_dir))
 
+# Names related to the LocalFasta argument to determine the name of the results. (optional)
 Local_Name <- c("Genome1","Genome2","Genome3")
 
-CaSilico(ResultsFolder="Example2",
+# Run CaSilico for subtypes V_A and V_B with ConservationThreshold = 0.98 and ConservationMethod = 1
+CaSilico(ResultsFolder="Example1",
          TargetFasta=data,
          TargetAccession=NULL,
-         CrisprTypes=c("casVI_A","casVI_B","casVI_D","casV_A","casV_B","casV_F1"),
+         CrisprTypes=c("casV_A","casV_B"),
          ConservationMethod = 1,
          ConservationThreshold=0.98,
          OffTarget = T,
@@ -73,13 +79,18 @@ CaSilico(ResultsFolder="Example2",
          LocalOff=T,
          LocalFasta=Local_Fasta,
          LocalName=Local_Name)
+##############################
+#
+#
+#
+############# (3) #############
+# Run with TargetFasta and online off-target analysis
 
-
-
-#Run with TargetFasta and off-target analysis (online off-target analysis)
-
+# Full path of target sequences
 data <- paste0(system.file(package = "CaSilico"),"/data/3D.fasta")
 
+# Run CaSilico for subtype VI_A with ConservationThreshold = 0.98 and ConservationMethod = 1
+# and online off-target analysis for Homo sapiens
 CaSilico(ResultsFolder="Example2",
          TargetFasta=data ,
          TargetAccession=NULL,
@@ -90,10 +101,15 @@ CaSilico(ResultsFolder="Example2",
          OffAsk = F,
          Organism="Homo sapiens",
          LocalOff=F)
-         
-         
- #Run with accession numbers
+##############################
+#
+#
+#
+############# (4) #############
+ # Run with accession numbers
 
+# Run CaSilico for subtypes VI_A and VI_B with ConservationThreshold = 0.98 and ConservationMethod = 1
+# The accession numbers used are: "U15717" and "U15718"
  CaSilico(ResultsFolder="Example3",
           TargetAccession=c("U15717", "U15718"),
           CrisprTypes=c("casVI_A","casVI_B"),
@@ -101,12 +117,17 @@ CaSilico(ResultsFolder="Example2",
           ConservationThreshold=0.98,
           OffTarget = F,
           OffAsk = F)
-
-
-
-
- #Run with sequence coordinate
+##############################
+#
+#
+#
+############# (5) #############
+ # Run with sequence coordinate
  
+ # Run CaSilico for subtypes VI_A and VI_B with ConservationThreshold = 0.98 and ConservationMethod = 1
+ # The desired coordinates are: 
+ # (1) chromosome = 1, start = 2000, end = 2150, strand = "-", species = "bos_taurus"
+ # (2) chromosome = 1, start = 2000, end = 2150, strand = "-", species = "bos_taurus"
  CaSilico(ResultsFolder="Example4",
           TargetCoordinate=list(chromosome=c("1","1"),
                              start=c("2000","2000"),
@@ -118,6 +139,7 @@ CaSilico(ResultsFolder="Example2",
           ConservationThreshold=0.98,
           OffTarget = F,
           OffAsk = F)
+##############################
           
           
       
