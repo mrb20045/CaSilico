@@ -194,9 +194,10 @@ CaSilico=function(ResultsFolder="CaSilico_output",
     RNAplot_location=paste0(package_location,"/dependency_linux/Blastn/RNAfold")
 
     path_software=c(RNAfold_path,
-                  Blast_location,
-                  makeblastdb_location,
-                  RNAplot_location)
+                    Blast_location,
+                    makeblastdb_location,
+                    RNAplot_location,
+                    paste0(MAFFT_location,"/mafft.bat",collapse = ""))
     for (path in path_software) {
       chmod_command=paste0("chmod  777  ","'",path,"'")
       lapply(chmod_command, system)
