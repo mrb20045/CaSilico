@@ -18,7 +18,8 @@ CaSilico(
   Organism = NULL,
   LocalOff = F,
   LocalFasta = c("Path1", "Path2"),
-  LocalName = c("Organism1", "Organism2")
+  LocalName = c("Organism1", "Organism2"),
+  Threads=4
 )
 }
 \arguments{
@@ -47,6 +48,9 @@ CaSilico(
 \item{LocalFasta}{Full path to the fasta file sequence(s) to be used for local off target analysis. One or more fasta file can be addressed; Example: LocalFasta=c("/yourpath1/filename1.fasta","/yourpath2/filename2.fasta").}
 
 \item{LocalName}{A vector including desired names related to the LocalFasta argument to determine the name of the results. If it is'nt specified by the user, Casilico considers sequence1, sequence2 and etc based on the number of fasta files in LocalFasta argument; Example: LocalName=c("Name1", "Name2").}
+
+\item{Threads}{Number of threads (CPUs) to use, default value is 4.; Example: Threads=8.}
+
 }
 \value{
 Casilico presents the results in HTML and PDF files that can be found in ReaultsFolder.
