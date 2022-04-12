@@ -148,7 +148,8 @@ CaSilico=function(ResultsFolder="CaSilico_output",
                   Organism=NULL,
                   LocalOff=F,
                   LocalFasta=c("Path1","Path2"),
-                  LocalName=c("Organism1","Organism2")){
+                  LocalName=c("Organism1","Organism2"),
+                  Threads=4){
 
 
 
@@ -349,10 +350,11 @@ CaSilico=function(ResultsFolder="CaSilico_output",
   # Run mafft
   setwd(MAFFT_location)
   if (host_system=="Linux") {
-    MAFFT_list<- "./mafft.bat  --auto --clustalout --inputorder final_fasta_file.fasta > final_fasta_file.aln"
+    MAFFT_list<- paste0("./mafft.bat  --auto --clustalout","   --thread ",Threads, " --inputorder final_fasta_file.fasta > final_fasta_file.aln")
+
   }
   if (host_system=="Windows") {
-    MAFFT_list<- "mafft  --auto --clustalout --inputorder final_fasta_file.fasta > final_fasta_file.aln"
+    MAFFT_list<- paste0("mafft  --auto --clustalout","   --thread ",Threads, " --inputorder final_fasta_file.fasta > final_fasta_file.aln")
   }
   lapply(MAFFT_list, system)   ###run MAFFT for all input .txt files
   FMDValn  <- read.alignment(file = "final_fasta_file.aln", format = "clustal")
@@ -3605,7 +3607,7 @@ CaSilico=function(ResultsFolder="CaSilico_output",
                 blast_command=paste(Blast_location,
                                     '  -task blastn   -db   genome_name_index   ' ,
                                     '  -word_size  7    -evalue  10    -query   blast_query.FASTA        -out  blast_out.txt    ' ,
-                                    '  -strand  ', blast_strand,
+                                    '  -strand  ', blast_strand,'  -num_threads  ', Threads,
                                     '     -outfmt "10 delim=@ qseqid sacc  qseq    sseq  length    qstart  qend sstart   send   gapopen   mismatch "    -num_alignments   5000 ',
                                     sep = '' ,collapse =  "" )
                 lapply(blast_command, system)
