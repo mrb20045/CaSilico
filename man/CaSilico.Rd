@@ -49,7 +49,7 @@ CaSilico(
 
 \item{LocalName}{A vector including desired names related to the LocalFasta argument to determine the name of the results. If it is'nt specified by the user, Casilico considers sequence1, sequence2 and etc based on the number of fasta files in LocalFasta argument; Example: LocalName=c("Name1", "Name2").}
 
-\item{Threads}{Number of threads (CPUs) to use, default value is 4.; Example: Threads=8.}
+\item{Threads}{Number of threads to use, default value is 4.; Example: Threads=8.}
 
 }
 \value{
