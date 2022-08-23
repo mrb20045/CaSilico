@@ -143,10 +143,16 @@ CaSilico(ResultsFolder="Example2",
           
           
       
-
-
-
 ```
+# Citation
+If you use CaSilico in your study, please consider citing:
+
+Asadbeigi A, Norouzi M, Vafaei Sadi MS, Saffari M, Bakhtiarizadeh MR. 2022. CaSilico: A versatile CRISPR package for in silico CRISPR RNA designing for Cas12, Cas13, and Cas14. Frontiers in Bioengineering and Biotechnology, 10:957131. 
+
+DOI: 10.3389/fbioe.2022.957131
+
+
+
 
 # License
 GPL-3
