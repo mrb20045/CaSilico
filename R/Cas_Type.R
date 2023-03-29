@@ -3690,7 +3690,7 @@ CaSilico=function(ResultsFolder="CaSilico_output",
                                   pos_mismach_blast_crRNA_gene=c(pos_mismach_blast_crRNA_gene,(W+length_pam_cas)-1,(W+length_pam_cas))
                                 }
                                 else if (s_blast_result_gene$V6==2) {
-                                  pos_mismach_blast_crRNA_gene=c(1,pos_mismach_blast_crRNA_gene,W)
+                                  pos_mismach_blast_crRNA_gene=c(1,pos_mismach_blast_crRNA_gene,(W+length_pam_cas))
                                 }
                                 else if (s_blast_result_gene$V6==3) {
                                   pos_mismach_blast_crRNA_gene=c(1,2,pos_mismach_blast_crRNA_gene)
