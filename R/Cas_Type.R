@@ -351,21 +351,21 @@ CaSilico=function(ResultsFolder="CaSilico_output",
   # Run mafft
   setwd(MAFFT_location)
   if (host_system=="Linux") {
-    MAFFT_list<- paste0("./mafft.bat  --auto --clustalout","   --thread ",Threads, " --inputorder final_fasta_file.fasta > final_fasta_file.aln")
+    MAFFT_list<- paste0("./mafft.bat  --auto ","   --thread ",Threads, " --inputorder final_fasta_file.fasta > final_fasta_file.aln")
 
   }
   if (host_system=="Windows") {
-    MAFFT_list<- paste0("mafft  --auto --clustalout","   --thread ",Threads, " --inputorder final_fasta_file.fasta > final_fasta_file.aln")
+    MAFFT_list<- paste0("mafft  --auto ","   --thread ",Threads, " --inputorder final_fasta_file.fasta > final_fasta_file.aln")
   }
   lapply(MAFFT_list, system)   ###run MAFFT for all input .txt files
-  FMDValn  <- read.alignment(file = "final_fasta_file.aln", format = "clustal")
+  FMDValn <- read.fasta(file = "final_fasta_file.aln", as.string = T)
   file.copy("final_fasta_file.aln",first_main_dir)
   file.remove("final_fasta_file.fasta")
   file.remove("final_fasta_file.aln")
   setwd(first_main_dir)
 
-  topoTypes_sequences<-FMDValn$seq
-  topoTypes_names<- FMDValn$nam
+  topoTypes_sequences <- FMDValn
+  topoTypes_names <- names(FMDValn)
 
   ################# calculate frequency matrix for each base in sequences #########
   score_matrix=matrix(0,5,length(strsplit(topoTypes_sequences[[1]],split = "")[[1]]))
@@ -4262,8 +4262,27 @@ CaSilico=function(ResultsFolder="CaSilico_output",
 mafftR=function(TargetFasta, MafftOptions = "--auto   --inputorder"){
 
   fasta_file=read.fasta(TargetFasta)
+   host_system=Sys.info()[['sysname']]
+
+  if (host_system %in% c("Windows","Linux")==F) {
+    stop("Currently CaSilico only supports Windows and Linux systems")
+  }
   package_location<-system.file(package = "CaSilico")
-  MAFFT_location=paste0(package_location,"/","dependency/mafft-win")
+
+  if (host_system=="Windows") {
+    MAFFT_location=paste0(package_location,"/","dependency_win/mafft-win")
+  }
+
+
+  ############## change mod sotware ###########
+
+
+  if (host_system=="Linux") {
+
+    MAFFT_location=paste0(package_location,"/dependency_linux/mafft-linux64")
+    
+    lapply(paste0("chmod -R 777  ",MAFFT_location), system)
+     }
   final_fasta_file=fasta_file
   write.fasta(final_fasta_file,names(final_fasta_file),"final_fasta_file.fasta")
   file.copy("final_fasta_file.fasta",MAFFT_location)
