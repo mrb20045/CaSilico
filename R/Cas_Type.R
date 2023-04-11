@@ -4237,6 +4237,7 @@ CaSilico=function(ResultsFolder="CaSilico_output",
 
   }
   file.remove("final_fasta_file.aln")
+  return("Design_complte")
   options(warn = defaultW)
 
 }
