@@ -331,7 +331,11 @@ CaSilico=function(ResultsFolder="CaSilico_output",
   }
 
   if (total_Nucleotide <= 40000000) {
-    write.fasta(final_file_list,names(fasta_file),"final_fasta_file.fasta")
+    if (length(final_file_list)==1) {
+      write.fasta(list(final_file_list[[1]],final_file_list[[1]]), c(names(fasta_file),names(fasta_file)), "final_fasta_file.fasta") 
+      }else{
+      write.fasta(final_file_list, names(fasta_file), "final_fasta_file.fasta")
+      }
     setwd(MAFFT_location)
     if (file.exists("final_fasta_file.fasta")) {
       file.remove("final_fasta_file.fasta")
